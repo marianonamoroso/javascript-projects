@@ -24,11 +24,11 @@ const description = `${country} is in ${continent}, and its ${population} millio
 console.log(description)
 
 // LECTURE: Taking Decisions: if / else Statements
-if (population > 33000000) console.log("Argentina's population is above average")
+if (population > 33000000) console.log(`${country}'s population is above average`)
 population = 13000000
-if (population > 33000000) console.log("Argentina's population is above average")
-population = 130000000
-if (population > 33000000) console.log("Argentina's population is above average")
+if (population > 33000000) console.log(`${country}'s population is above average`)
+population = 400000000
+if (population > 33000000) console.log(`${country}'s population is above average`)
 
 // LECTURE: Type Conversion and Coercion
 console.log('9' - '5'); // 4
