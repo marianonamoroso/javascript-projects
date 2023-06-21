@@ -12,15 +12,14 @@ let markHigherBMI
 //Mark
 mass = 78
 height = 1.69
-markBMI = mass / height
+markBMI = mass / height ** 2
 console.log(`Mark's BMI: ${markBMI}`)
 
 //John
 mass = 92
 height = 1.95
-johnBMI = mass / height
+johnBMI = mass / height ** 2
 console.log(`John's BMI: ${johnBMI}`)
-
 console.log(`Is Mark higher than John? ${markBMI > johnBMI ? markHigherBMI = true : markHigherBMI = false}`)
 
 
