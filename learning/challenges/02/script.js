@@ -46,19 +46,20 @@ the function you created before
 */
 console.log(``)
 console.log(`Coding Challenge #2`)
-const calcTip = (bill) => {
-    if (bill >= 50 && bill <= 300) {
-        return bill * 0.15 
-    } else return bill * 0.20
-}
 
-const bills = [calcTip(100), calcTip(200), calcTip(300)]
-const total = [100 + calcTip(100), 200 + calcTip(200), 300 + calcTip(300)]
+// const calcTip = (bill) => {
+//     return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2
+// }
 
-console.log(`Using only the arrow function calcTip: ${calcTip(100)}`)
-console.log(`The bills used: 100, 200, 300`)
-console.log(`Logging the array that contains the tips: ${bills}`)
-console.log(`Printing the total values (bills + values): ${total}`)
+const calcTip = (bill) => bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2
+
+const bills = [125, 555, 44]
+const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])]
+const totals = [bills[0] + tips[0], bills[1] + tips[2], bills[2] + tips[2]]
+
+console.log(`Bills values: ${bills}`)
+console.log(`Tips values: ${tips}`)
+console.log(`Totals values: ${totals}`)
 
 // Coding Challenge #3
 /*
@@ -78,25 +79,31 @@ tall.
 */
 console.log(``)
 console.log(`Coding Challenge #3`)
-let bmi = 0
 
-const calcBMI = (mass, height) => {
-    bmi = mass / (height ** 2)
-    return bmi
+const markObj = {
+    fullName: "Mark Miller",
+    mass: 78,
+    heigh: 1.69,
+
+    calcBMI() {
+        this.bmi = this.mass / (this.heigh ** 2)
+        return this.bmi
+    } 
 }
-const bmiMark = calcBMI(78, 1.69)
-console.log(`Mark Miller's BMI: ${bmiMark}`)
 
-const bmiJohn = calcBMI(92, 1.95)
-console.log(`John Smith's BMI: ${bmiJohn}`)
+const johnObj = {
+    fullName: "John Smith",
+    mass: 92,
+    heigh: 1.95,
 
-// Option #1
-if (bmiMark > bmiJohn) console.log(`Mark's BMI (${bmiMark}) is higher than John's (${bmiJohn})!`)
-else console.log(`John's BMI (${bmiJohn}) is higher than Mark's (${bmiMark})!`)
-
-// Option #2
-console.log(`${bmiMark > bmiJohn ? "Mark's BMI is higher than John's (" + bmiMark + ")!" : 
-    "John's BMI (" + bmiJohn + ") is higher than Mark's (" + bmiMark + ")!" }`)
+    calcBMI() {
+        this.bmi = this.mass / (this.heigh ** 2)
+        return this.bmi
+    } 
+}
+console.log(`${johnObj.calcBMI() > markObj.calcBMI() ? 
+    "John's BMI (" + johnObj.bmi  + ") is higher than Mark's (" + markObj.bmi + ")!" : 
+    "Mark's BMI (" + markObj.bmi  + ") is higher than John's (" + johnObj.bmi + ")!"}`)
 
 // Coding Challenge #4
 /*
@@ -109,7 +116,7 @@ tips and total values (bill + tip) for every bill value in the bills array. Use 
 loop to perform the 10 calculations!
 Test data: 22, 295, 176, 440, 37, 105, 10, 1100, 86 and 52
 Hints: Call ‘calcTip ‘in the loop and use the push method to add values to the
-tips and totals arrays 😉
+tips and totals arrays 
 Bonus:
 4. Bonus: Write a function 'calcAverage' which takes an array called 'arr' as
 an argument. This function calculates the average of all numbers in the given
@@ -129,19 +136,34 @@ console.log(`Coding Challenge #4`)
 
 const bills4    = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52]
 let tips4       = []
-let totals      = []
+let totals4      = []
 
-const calcTip4 = (bill) => {
-    if (bill >= 50 && bill <= 300) {
-        return bill * 0.15 
-    } else return bill * 0.20
-}
+const calcTip4 = (bill) => bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.20
 
 for (let i = 0; i < bills4.length; i++) {
+    tips4.push(calcTip4(bills4[i]))
+    totals4.push(bills4[i] + tips4[i])
+    // Printing values
     console.log(`Bill: ${bills4[i]}`)
-    console.log(`Tip: ${calcTip4(bills4[i])}`)
+    console.log(`Tip: ${tips4[i]}`)
+    console.log(`Total: ${totals4[i]}`)
     console.log("")
 }
+
+// Bonus 'calcAverageArray'
+const calcAverageArray = function(array) {
+    let sumArray = 0
+    let countArray = 0
+
+    for (let i = 0; i < array.length; i++) {
+        sumArray = sumArray + array[i]
+        countArray++    
+    }
+    return sumArray / countArray
+}
+console.log("\n")
+console.log(`Array Total Values: ${totals4}`)
+console.log(calcAverageArray(totals4))
 
 
 
