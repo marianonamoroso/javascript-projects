@@ -13,49 +13,99 @@ fields
 */
 'use strict';
 
-let randomValue =  Math.floor(Math.random() * 20);
-let score = 20
+// Variables
+let tries = 20
+let score = tries
 let highScore = 0
+let randomValue = 0
 
+// Core Functions
+const resetScore = function() {
+    return score = tries
+}
+
+const calcRandomValue = function (number) {
+     randomValue =  Math.floor(Math.random() * number)
+}
+
+const decreaseScoreCounter = function () {score -= 1}
+
+// DOM Functions
+const displayMessage = (message) => {
+    document.querySelector('.message').textContent = message
+}
+
+const displayNumber = (numberText) => {
+    document.querySelector('.number').textContent = numberText
+}
+
+const changeGuessValue = (guessText) => {
+    document.querySelector('.guess').value = guessText
+}
+const displayHighscore = (highscoreText) => {
+    document.querySelector('.highscore').textContent = highscoreText
+}
+
+const changeBackgroundColor = (color) => {
+    document.querySelector('body').style.backgroundColor = color
+}
+
+const changeScore = (score) => {
+    document.querySelector('.score').textContent = score
+}
+
+const changeNumberWidth = (width) => {
+    document.querySelector('.number').style.width = width
+
+}
+
+const returnGuessValue = function () {
+    return Number(document.querySelector('.guess').value)
+}
+
+// Executing Random Value
+calcRandomValue(20)
+
+console.log(randomValue)
+
+// Guess
 document.querySelector('.check').addEventListener('click', function(){
-    const guess = Number(document.querySelector('.guess').value)
-    if (score == 1) {
-        score -= 1
-        document.querySelector('.message').textContent = "⛔️ You lost!"
-        document.querySelector('.guess').value = ""
-        document.querySelector('.score').textContent = 0
-    }
-    else if (guess > randomValue){
-        score -= 1
-        document.querySelector('.message').textContent = "Less than the secret!"
-        document.querySelector('.score').textContent = score
-    }
-    else if (guess < randomValue) {
-        score -= 1
-        document.querySelector('.message').textContent = "Bigger than the secret!"
-        document.querySelector('.score').textContent = score
-    }
-    else if (guess == randomValue){
-        score -= 1    
+    const guess = returnGuessValue()
+    if (guess == randomValue){
+        decreaseScoreCounter()
         if (score > highScore) {
             highScore = score
-            document.querySelector('.highscore').textContent = highScore
+            displayHighscore(highScore)
         }
-        document.querySelector('.score').textContent = score
-        document.querySelector('.highscore').textContent = highScore
-        document.querySelector('.message').textContent = "You win! 🏆"
-        document.querySelector('body').style.backgroundColor = '#60b347'
-        document.querySelector('.number').textContent = randomValue
-        document.querySelector('.number').style.width = '30rem'
+        
+        changeScore(score)
+        displayHighscore(highScore)
+        displayMessage("You win! 🏆")
+
+        changeBackgroundColor("#60b347")
+        displayNumber(randomValue)
+        changeNumberWidth("30rem")
     }
+    else if (score == 1) {
+        decreaseScoreCounter()
+        displayMessage("⛔️ You lost!")
+        changeGuessValue("")
+        changeScore(0)
+    }
+    else if (guess !== randomValue){
+        decreaseScoreCounter()
+        displayMessage(`${guess > randomValue ? "Less than the secret!" : "Bigger than the secret!" }`)
+        changeScore(score)
+    }
+
 })
+// Again
 document.querySelector('.again').addEventListener('click', function(){
-    document.querySelector('.number').style.width = '15rem'
-    document.querySelector('body').style.backgroundColor = '#222'
-    document.querySelector('.guess').value = ""
-
-    score = 20
-    randomValue =  Math.floor(Math.random() * 20);
-
-    document.querySelector('.score').textContent = score
+    changeNumberWidth("15rem")
+    changeBackgroundColor('#222')
+    changeGuessValue("")
+    displayNumber("?")
+    resetScore()
+    changeScore(score)
+    calcRandomValue(20)
 })
