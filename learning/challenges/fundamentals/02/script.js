@@ -164,6 +164,3 @@ const calcAverageArray = function(array) {
 console.log("\n")
 console.log(`Array Total Values: ${totals4}`)
 console.log(calcAverageArray(totals4))
-
-
-
